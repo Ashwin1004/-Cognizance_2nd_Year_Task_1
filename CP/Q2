@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+class SinglyLinkedListNode {
+    int data;
+    SinglyLinkedListNode next;
+
+    SinglyLinkedListNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Solution {
+
+    public static int compare_lists(SinglyLinkedListNode llist1, SinglyLinkedListNode llist2) {
+      
+        while (llist1 != null && llist2 != null) {
+            
+            if (llist1.data != llist2.data) {
+                return 0;
+            }
+
+            llist1 = llist1.next;
+            llist2 = llist2.next;
+        }
+
+       
+        if (llist1 == null && llist2 == null) {
+            return 1;
+        }
+
+        
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        
+        int t = scanner.nextInt();
+
+        while (t-- > 0) {
+
+            int n1 = scanner.nextInt();
+            SinglyLinkedListNode llist1 = null;
+            SinglyLinkedListNode tail1 = null;
+
+            for (int i = 0; i < n1; i++) {
+                int data = scanner.nextInt();
+                SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+                if (llist1 == null) {
+                    llist1 = newNode;
+                    tail1 = newNode;
+                } else {
+                    tail1.next = newNode;
+                    tail1 = newNode;
+                }
+            }
+
+        
+            int n2 = scanner.nextInt();
+            SinglyLinkedListNode llist2 = null;
+            SinglyLinkedListNode tail2 = null;
+
+            for (int i = 0; i < n2; i++) {
+                int data = scanner.nextInt();
+                SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+                if (llist2 == null) {
+                    llist2 = newNode;
+                    tail2 = newNode;
+                } else {
+                    tail2.next = newNode;
+                    tail2 = newNode;
+                }
+            }
+
+            
+            System.out.println(compare_lists(llist1, llist2));
+        }
+
+        scanner.close();
+    }
+}
