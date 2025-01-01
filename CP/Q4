@@ -1,0 +1,76 @@
+import java.util.*;
+
+class SinglyLinkedListNode {
+    int data;
+    SinglyLinkedListNode next;
+
+    SinglyLinkedListNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Solution {
+    public static int hasCycle(SinglyLinkedListNode head) {
+        if (head == null) {
+            return 0; 
+        }
+
+    
+        SinglyLinkedListNode slow = head;
+        SinglyLinkedListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;           
+            fast = fast.next.next;      
+            if (slow == fast) {
+                return 1; 
+            }
+        }
+
+        return 0; 
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+     
+        int t = scanner.nextInt();
+
+        while (t-- > 0) {
+            int index = scanner.nextInt();
+            int n = scanner.nextInt();
+
+            SinglyLinkedListNode head = null;
+            SinglyLinkedListNode tail = null;
+            SinglyLinkedListNode cycleNode = null;
+
+           
+            for (int i = 0; i < n; i++) {
+                int data = scanner.nextInt();
+                SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+                if (head == null) {
+                    head = newNode;
+                    tail = newNode;
+                } else {
+                    tail.next = newNode;
+                    tail = newNode;
+                }
+
+               
+                if (i == index) {
+                    cycleNode = newNode;
+                }
+            }
+
+            
+            if (index != -1) {
+                tail.next = cycleNode;
+            }
+
+            System.out.println(hasCycle(head));
+        }
+
+        scanner.close();
+    }
+}
